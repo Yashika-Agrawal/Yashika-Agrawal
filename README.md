@@ -2,7 +2,7 @@
 <!-- <h3 align="center">A passionate frontend developer</h3> -->
 <img align="right" alt="Coding" width="400" src="https://media.tenor.com/S59bPkT0pqcAAAAC/programming.gif">
 
-- 🔭 I’m currently working on **Api based project using JS**
+- 🔭 I’m currently working on **Mental Wellbeing App**
 - 🚀 Contributing to open-source projects with **GSSoC'23**
 - 🌱 I’m currently learning **MERN STACK**
 
