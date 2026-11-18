@@ -93,7 +93,7 @@
   <g class="o1">
     <text x="32" y="108" fill="#34d399" class="mono" font-size="15" font-weight="600">➜</text>
     <text x="56" y="108" fill="#f1f5f9" class="mono" font-size="15" font-weight="700">Yashika Agrawal</text>
-    <text x="210" y="108" fill="#94a3b8" class="mono" font-size="14">· Backend &amp; Systems Engineer</text>
+    <text x="210" y="108" fill="#94a3b8" class="mono" font-size="14">· Software Engineer (Full Stack)</text>
   </g>
 
   <!-- Line 2: current focus -->
@@ -103,12 +103,12 @@
   </g>
   <g class="o2">
     <text x="32" y="180" fill="#cbd5e1" class="mono" font-size="14">{</text>
-    <text x="52" y="180" fill="#a5b4fc" class="mono" font-size="14">"building":</text>
-    <text x="150" y="180" fill="#fef08a" class="mono" font-size="14">"RailRush (.NET 8 &amp; PostgreSQL)"</text>
-    <text x="460" y="180" fill="#cbd5e1" class="mono" font-size="14">, </text>
-    <text x="480" y="180" fill="#a5b4fc" class="mono" font-size="14">"exploring":</text>
-    <text x="585" y="180" fill="#fef08a" class="mono" font-size="14">"Linux Internals &amp; Concurrency"</text>
-    <text x="850" y="180" fill="#cbd5e1" class="mono" font-size="14">}</text>
+    <text x="52" y="180" fill="#a5b4fc" class="mono" font-size="14">"stack":</text>
+    <text x="115" y="180" fill="#fef08a" class="mono" font-size="14">"Full Stack (.NET, React, Node.js, PostgreSQL)"</text>
+    <text x="525" y="180" fill="#cbd5e1" class="mono" font-size="14">, </text>
+    <text x="545" y="180" fill="#a5b4fc" class="mono" font-size="14">"learning":</text>
+    <text x="640" y="180" fill="#fef08a" class="mono" font-size="14">"Linux &amp; DevOps"</text>
+    <text x="795" y="180" fill="#cbd5e1" class="mono" font-size="14">}</text>
   </g>
 
   <!-- Line 3: git log -->
@@ -129,8 +129,8 @@
   <g class="o4">
     <rect x="32" y="318" width="10" height="10" rx="2" fill="#10b981"/>
     <text x="52" y="328" fill="#34d399" class="mono" font-size="14" font-weight="600">ONLINE</text>
-    <text x="120" y="328" fill="#94a3b8" class="mono" font-size="14">· Building, breaking &amp; exploring how systems work under the hood</text>
-    <rect x="740" y="316" width="9" height="16" fill="#34d399" class="cursor"/>
+    <text x="120" y="328" fill="#94a3b8" class="mono" font-size="14">· Building full-stack systems &amp; exploring how software works under the hood</text>
+    <rect x="765" y="316" width="9" height="16" fill="#34d399" class="cursor"/>
   </g>
 
 </svg>

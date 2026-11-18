@@ -4,12 +4,12 @@
 <img src="assets/terminal.svg" alt="Yashika Agrawal - Interactive Developer Terminal" width="100%"/>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=15&duration=2800&pause=1000&color=38BDF8&center=true&vCenter=true&multiline=true&width=620&height=48&lines=%24+dotnet+build+backend-services...;%24+streaming+events+with+Kafka+%26+Socket.IO...;%24+provisioning+isolated+Linux+VMs+with+Multipass..." alt="Live typing terminal" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=15&duration=2800&pause=1000&color=38BDF8&center=true&vCenter=true&multiline=true&width=620&height=48&lines=%24+dotnet+build+fullstack-apps...;%24+npm+run+dev%3Areact-frontend...;%24+provisioning+isolated+Linux+VMs+with+Multipass..." alt="Live typing terminal" />
 </p>
 
-**Software Engineer · Backend & Systems · Cloud & DevOps**
+**Software Engineer · Full Stack Development**
 
-*Building web applications, exploring how systems work under the hood, and turning every bug into an experiment.*
+*I build full-stack web applications, explore how systems work under the hood, and turn what I learn into experiments.*
 
 [![GitHub](https://img.shields.io/badge/GitHub-Yashika--Agrawal-161b22?style=flat-square&logo=github)](https://github.com/Yashika-Agrawal)
 [![Email](https://img.shields.io/badge/Email-Get%20in%20touch-161b22?style=flat-square&logo=gmail)](mailto:yashikayash2002@gmail.com)
@@ -23,28 +23,25 @@
 <!-- LAB:START -->
 | Area | Current Focus / Live Pulse |
 |---|---|
-| 🚀 **Building** | RailRush (.NET 8 & PostgreSQL) |
-| 🔍 **Exploring** | Linux & OS Internals · Concurrency & Transactions · DevOps & CI/CD Automation |
+| 🚀 **Building** | Pollify (Full-stack real-time polling application) |
+| 🔍 **Exploring** | Full-Stack Web Development (.NET / React / Node.js) · Linux Internals & DevOps Automation |
 | 🧪 **Latest Experiment** | [Local Linux VMs & SSH key authentication with Multipass](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/multipass.md) |
 | 📝 **Engineering Note** | [CI/CD Pipeline Automation: Builds, Triggers & Runners](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/Ci-Cd/intro-to-ci-cd.md) |
 | 💡 **Today I Learned** | [Why SSH prints host key authenticity warning on first connect (Host verification vs client key pairs)](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/multipass.md) |
 <!-- LAB:END -->
 
-> ⚡ *This section is kept alive automatically by [`scripts/update_lab.py`](scripts/update_lab.py) and GitHub Actions.*
-
 ---
 
 ## `~/playground-matrix`
 
-> A clickable constellation of hands-on experiments from [`Engineering-playground`](https://github.com/Yashika-Agrawal/Engineering-playground). Click any link to jump straight into the code or notes:
+> A clickable constellation of hands-on experiments from [`Engineering-playground`](https://github.com/Yashika-Agrawal/Engineering-playground). Click any link to jump straight into the notes:
 
 | Domain | Focus Areas & Hands-On Experiments | Direct Links |
 |:---|:---|:---|
 | 🐧 **DevOps & Linux** | Local Ubuntu VMs, Multipass, SSH port 22 security groups, host key verification, firewall rules | [`multipass.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/multipass.md) |
 | 🔄 **CI/CD Automation** | Pipeline architecture, automated build/test gates, GitHub Actions runner isolation | [`intro-to-ci-cd.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/Ci-Cd/intro-to-ci-cd.md) |
-| ⚡ **Real-Time & Events** | Event streaming with Apache Kafka, real-time WebSockets, handling telemetry bursts | [`live-tracker`](https://github.com/Yashika-Agrawal/live-tracker) · [`pollify`](https://github.com/Yashika-Agrawal/pollify) |
-| 🚆 **Backend & Data** | Database modeling, concurrency control, avoiding double-bookings with row locks (.NET 8 & PostgreSQL) | [`RailRush`](https://github.com/Yashika-Agrawal/RailRush) |
-| 🛠️ **System Fundamentals** | Linux daemons, system services, DNS, client-server lifecycle | [`intro-to-devops.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/intro-to-devops.md) |
+| 🌐 **Full-Stack Applications** | Real-time state synchronization, WebSocket event lifecycles, full-stack data flow | [`pollify`](https://github.com/Yashika-Agrawal/pollify) · [`live-tracker`](https://github.com/Yashika-Agrawal/live-tracker) |
+| 🛠️ **System Fundamentals** | Linux daemons, system services, networking basics, client-server architecture | [`intro-to-devops.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/intro-to-devops.md) |
 
 ---
 
@@ -52,81 +49,40 @@
 
 <div align="center">
 
-| Project | What I'm Building | Stack |
+| Project | What I Built | Stack |
 |---|---|---|
-| **RailRush** | A railway reservation system exploring ACID transactions, concurrency locking, and booking flows. | C# · .NET 8 · PostgreSQL · EF Core |
-| [**Live Tracker**](https://github.com/Yashika-Agrawal/live-tracker) | Real-time vehicle location streaming with partitioned event queues to decouple ingest from broadcast. | Express · Socket.IO · Apache Kafka · Docker |
-| [**Pollify**](https://github.com/Yashika-Agrawal/pollify) | Real-time polling application with instant state sync across connected clients. | React · Node.js · PostgreSQL · Prisma · Socket.IO |
+| [**Pollify**](https://github.com/Yashika-Agrawal/pollify) | Real-time polling web application with live voting results and instant state synchronization across clients. | React · Node.js · PostgreSQL · Prisma · Socket.IO |
+| [**Live Tracker**](https://github.com/Yashika-Agrawal/live-tracker) | Real-time vehicle location streaming on interactive maps with live coordinate broadcast. | Express · Socket.IO · Docker · Leaflet |
 
 </div>
 
 <br/>
 
-### 🛠️ Interactive System Architecture Deep-Dives
-*(Click to expand the technical breakdown of each system)*
-
-<details>
-<summary><b>🔍 View: Live Tracker Architecture (Event-Driven Stream)</b></summary>
-<br/>
-
-```text
-[ Leaflet Client (Browser) ]
-         │
-         │  (WebSockets / Socket.IO)
-         ▼
-[ Express.js Gateway ]
-         │
-         │  (Producer Event)
-         ▼
-[ Apache Kafka Cluster ] ──► [ Topic: vehicle-coordinates ]
-         │
-         │  (Consumer Stream)
-         ▼
-[ Dockerized Service Worker ] ──► Real-Time Broadcast & Spatial Processing
-```
-
-* **Engineering Decision:** Decoupled telemetry ingestion from client broadcasts using Kafka to prevent WebSocket gateway bottlenecks during coordinate bursts.
-
-</details>
-
-<details>
-<summary><b>🔍 View: RailRush Reservation & Concurrency Flow</b></summary>
-<br/>
-
-```text
-[ Booking Request ] ──► [ ASP.NET Core Web API ] ──► [ EF Core Transaction ]
-                                                              │
-                                                              ▼
-                                                    [ Row-Level DB Lock ]
-                                                    (Prevents Double Booking)
-                                                              │
-                                                              ▼
-                                                    [ PostgreSQL Commit ]
-```
-
-* **Engineering Decision:** Exploring ACID transaction isolation levels and concurrency control to handle simultaneous ticket bookings safely under high contention.
-
-</details>
-
----
-
-## `~/things-i-got-wrong`
+### 🛠️ Full-Stack Architecture Deep-Dive
+*(Click to expand the technical flow)*
 
 <details open>
-<summary><b>💡 Bugs, Misconceptions & What I Learned Under the Hood</b></summary>
+<summary><b>🔍 View: Pollify Full-Stack Architecture (Real-Time State Sync)</b></summary>
 <br/>
 
-- **SSH Host Verification vs Client Keys (Linux / Multipass):**  
-  *The Mistake:* When SSH threw `The authenticity of host '192.168.252.2' can't be established`, I initially thought my local Mac SSH key wasn't loaded.  
-  *The Reality:* SSH verifies the identity of the **server** (host key fingerprint) before sending client credentials to prevent Man-in-the-Middle attacks. Once accepted, it is permanently pinned in `~/.ssh/known_hosts`.
+```text
+[ React + Tailwind Frontend ]
+         │
+         │  (1) Cast Vote / Create Poll
+         ▼
+[ Express.js + Node.js API Gateway ]
+         │
+         ├──► (2) Persist Vote ──► [ Prisma ORM ] ──► [ PostgreSQL ]
+         │
+         │    (3) Broadcast Live Tally (Event Emit)
+         ▼
+[ Socket.IO Real-Time Server ]
+         │
+         ▼
+[ All Connected Client UIs Updated Instantly ]
+```
 
-- **In-Memory Locks in Distributed Backends (.NET / PostgreSQL):**  
-  *The Mistake:* Using C# memory locks (`lock (seatObj)`) to prevent concurrent double-booking in a reservation system.  
-  *The Reality:* Memory locks only protect a single process on a single machine. The moment the backend scales across multiple containers or instances, transactions collide. True safety requires database-level row locks (`SELECT FOR UPDATE`) or serializable isolation.
-
-- **Direct WebSocket Broadcast under Traffic Bursts:**  
-  *The Mistake:* Emitting raw location telemetry straight to all connected WebSocket clients from the API route.  
-  *The Reality:* Under coordinate spikes, the event loop chokes and frames drop. Inserting an Apache Kafka broker between ingestion and consumption buffers bursts smoothly without dropping packets.
+* **Core Focus:** Ensuring database persistence through Prisma transactions while broadcasting live vote aggregates to connected clients via WebSockets with minimal latency.
 
 </details>
 
@@ -136,9 +92,9 @@
 
 | Layer | Technologies & Tools |
 |---|---|
+| **Frontend** | React · JavaScript · TypeScript · Tailwind CSS · HTML5 / CSS3 |
 | **Backend & APIs** | C# · .NET · ASP.NET Core · Node.js · Express · REST APIs |
-| **Data & Messaging** | PostgreSQL · SQL · MongoDB · Prisma · Apache Kafka |
-| **Frontend** | React · JavaScript · TypeScript · Tailwind CSS |
+| **Data & Databases** | PostgreSQL · SQL · MongoDB · Prisma ORM |
 | **Infra & DevOps** | Docker · Linux · Multipass · Git · GitHub Actions · CI/CD · AWS |
 
 ---

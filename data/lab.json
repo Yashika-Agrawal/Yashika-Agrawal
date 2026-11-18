@@ -1,11 +1,10 @@
 {
   "building": [
-    "RailRush (.NET 8 & PostgreSQL)"
+    "Pollify (Full-stack real-time polling application)"
   ],
   "exploring": [
-    "Linux & OS Internals",
-    "Concurrency & Transactions",
-    "DevOps & CI/CD Automation"
+    "Full-Stack Web Development (.NET / React / Node.js)",
+    "Linux Internals & DevOps Automation"
   ],
   "recent_experiment": {
     "title": "Local Linux VMs & SSH key authentication with Multipass",
