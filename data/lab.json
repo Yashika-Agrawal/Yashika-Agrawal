@@ -1,0 +1,17 @@
+{
+  "building": [
+    "RailRush (.NET & PostgreSQL)"
+  ],
+  "exploring": [
+    "Backend engineering (.NET / Node.js)",
+    "DevOps & Linux internals"
+  ],
+  "recent_experiment": {
+    "title": "Local Linux VMs & networking with Multipass",
+    "url": "https://github.com/Yashika-Agrawal/Engineering-playground"
+  },
+  "latest_note": {
+    "title": "CI/CD Pipeline automation & build flows",
+    "url": "https://github.com/Yashika-Agrawal/Engineering-playground"
+  }
+}

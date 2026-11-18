@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="470" viewBox="0 0 1100 470" role="img" aria-labelledby="title">
+<title id="title">Yashika's engineering concept map</title>
+<rect width="1100" height="470" rx="18" fill="#0d1117"/>
+<g stroke="#334155" stroke-width="2" fill="none">
+ <path d="M550 220 L220 105 M550 220 L550 90 M550 220 L880 105 M550 220 L220 355 M550 220 L550 380 M550 220 L880 355"/>
+ <path d="M220 105 L550 90 L880 105" opacity=".35"/>
+</g>
+<g font-family="monospace" text-anchor="middle">
+ <rect x="400" y="175" width="300" height="90" rx="16" fill="#14251d" stroke="#7ee787" stroke-width="2"/>
+ <text x="550" y="211" fill="#7ee787" font-size="17">ENGINEERING LAB</text><text x="550" y="239" fill="#e2e8f0" font-size="21" font-weight="bold">Learning by building</text>
+ <g>
+  <rect x="80" y="55" width="280" height="100" rx="13" fill="#111d2b" stroke="#60a5fa"/><text x="220" y="95" fill="#93c5fd" font-size="19">Frontend</text><text x="220" y="125" fill="#cbd5e1" font-size="14">React · TypeScript · UI</text>
+  <rect x="410" y="35" width="280" height="100" rx="13" fill="#211a2e" stroke="#c4b5fd"/><text x="550" y="75" fill="#c4b5fd" font-size="19">Backend</text><text x="550" y="105" fill="#cbd5e1" font-size="14">.NET · Node.js · APIs</text>
+  <rect x="740" y="55" width="280" height="100" rx="13" fill="#102522" stroke="#5eead4"/><text x="880" y="95" fill="#5eead4" font-size="19">Databases</text><text x="880" y="125" fill="#cbd5e1" font-size="14">PostgreSQL · SQL · MongoDB</text>
+  <rect x="80" y="305" width="280" height="100" rx="13" fill="#241e12" stroke="#fbbf24"/><text x="220" y="345" fill="#fbbf24" font-size="19">Networking</text><text x="220" y="375" fill="#cbd5e1" font-size="14">HTTP · DNS · TCP/IP</text>
+  <rect x="410" y="335" width="280" height="100" rx="13" fill="#211a2e" stroke="#c4b5fd"/><text x="550" y="375" fill="#c4b5fd" font-size="19">Real-Time &amp; Events</text><text x="550" y="405" fill="#cbd5e1" font-size="14">Kafka · WebSockets · Socket.IO</text>
+  <rect x="740" y="305" width="280" height="100" rx="13" fill="#14251d" stroke="#7ee787"/><text x="880" y="345" fill="#7ee787" font-size="19">DevOps</text><text x="880" y="375" fill="#cbd5e1" font-size="14">Docker · Linux · CI/CD</text>
+ </g>
+</g>
+</svg>
