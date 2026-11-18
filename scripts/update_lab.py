@@ -18,14 +18,21 @@ def joined(values):
 
 experiment = item(data.get("recent_experiment", {}))
 note = item(data.get("latest_note", {}))
-section = "\n".join([
-    "| Area | Current focus |",
+today = item(data.get("today_i_learned", {}))
+
+rows = [
+    "| Area | Current Focus / Live Pulse |",
     "|---|---|",
-    f"| **Building** | {joined(data.get('building', []))} |",
-    f"| **Exploring** | {joined(data.get('exploring', []))} |",
-    f"| **Recent experiment** | {experiment} |",
-    f"| **Latest note** | {note} |",
-])
+    f"| 🚀 **Building** | {joined(data.get('building', []))} |",
+    f"| 🔍 **Exploring** | {joined(data.get('exploring', []))} |",
+    f"| 🧪 **Latest Experiment** | {experiment} |",
+    f"| 📝 **Engineering Note** | {note} |",
+]
+
+if today and today != "Untitled":
+    rows.append(f"| 💡 **Today I Learned** | {today} |")
+
+section = "\n".join(rows)
 
 readme_path = ROOT / "README.md"
 readme = readme_path.read_text(encoding="utf-8")

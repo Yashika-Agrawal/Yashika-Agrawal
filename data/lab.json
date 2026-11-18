@@ -1,17 +1,22 @@
 {
   "building": [
-    "RailRush (.NET & PostgreSQL)"
+    "RailRush (.NET 8 & PostgreSQL)"
   ],
   "exploring": [
-    "Backend engineering (.NET / Node.js)",
-    "DevOps & Linux internals"
+    "Linux & OS Internals",
+    "Concurrency & Transactions",
+    "DevOps & CI/CD Automation"
   ],
   "recent_experiment": {
-    "title": "Local Linux VMs & networking with Multipass",
-    "url": "https://github.com/Yashika-Agrawal/Engineering-playground"
+    "title": "Local Linux VMs & SSH key authentication with Multipass",
+    "url": "https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/multipass.md"
   },
   "latest_note": {
-    "title": "CI/CD Pipeline automation & build flows",
-    "url": "https://github.com/Yashika-Agrawal/Engineering-playground"
+    "title": "CI/CD Pipeline Automation: Builds, Triggers & Runners",
+    "url": "https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/Ci-Cd/intro-to-ci-cd.md"
+  },
+  "today_i_learned": {
+    "title": "Why SSH prints host key authenticity warning on first connect (Host verification vs client key pairs)",
+    "url": "https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/multipass.md"
   }
 }
