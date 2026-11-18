@@ -99,22 +99,6 @@
 
 ---
 
-## `~/contributions`
-
-<div align="center">
-
-<!-- 3D Isometric Contribution Skyline (Falls back to snake if pending first run) -->
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="profile-3d-contrib/profile-night-rainbow.svg">
-  <img src="profile-3d-contrib/profile-night-rainbow.svg" alt="3D Isometric Contribution Skyline" width="100%" onerror="this.style.display='none'"/>
-</picture>
-
-<img src="https://raw.githubusercontent.com/Yashika-Agrawal/Yashika-Agrawal/output/github-contribution-grid-snake-dark.svg" alt="GitHub contribution snake animation" width="100%"/>
-
-</div>
-
----
-
 <div align="center">
 
 **Always learning. Always building. Always curious.**
