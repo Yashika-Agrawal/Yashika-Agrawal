@@ -2,7 +2,7 @@ name: Update engineering lab section
 
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "*/5 * * * *"
   push:
     paths:
       - "data/lab.json"
