@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 USERNAME = os.environ.get("GITHUB_USERNAME", "Yashika-Agrawal")
 PLAYGROUND_REPO = os.environ.get("PLAYGROUND_REPO", f"{USERNAME}/Engineering-playground")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "").strip()
-ACTIVE_WINDOW_DAYS = int(os.environ.get("ACTIVE_WINDOW_DAYS", "30"))
+ACTIVE_WINDOW_DAYS = int(os.environ.get("ACTIVE_WINDOW_DAYS", "3"))
 
 
 def github_get(url: str):
@@ -412,7 +412,7 @@ def main():
 
     if active_repos:
         repo_links = " · ".join(f"[{r['name']}]({r['url']})" for r in active_repos)
-        lab_rows.append(f"| 🚀 **Active Repos (30d)** | {repo_links} |")
+        lab_rows.append(f"| 🚀 **Active Repos** | {repo_links} |")
 
     if latest_note:
         title_escaped = latest_note["title"].replace("|", "\\|")

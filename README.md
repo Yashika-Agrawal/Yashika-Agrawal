@@ -23,7 +23,7 @@
 <!-- LAB:START -->
 | Area | Live Pulse |
 |---|---|
-| 🚀 **Active Repos (30d)** | [Engineering-playground](https://github.com/Yashika-Agrawal/Engineering-playground) · [Ananta](https://github.com/Yashika-Agrawal/Ananta) |
+| 🚀 **Active Repos** | [Engineering-playground](https://github.com/Yashika-Agrawal/Engineering-playground) |
 | 📝 **Latest Note** | [Deploying wiTH MultiPass](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/multipass.md) (`Devops`) |
 | 🕒 **Latest Commit** | [`2c74878`](https://github.com/Yashika-Agrawal/Engineering-playground/commit/2c74878f6e9bd45a436cba5016957c6a737a758b) docs: add guide for deploying app to Ubuntu VM via Multipass and Ng… (`Engineering-playground`) |
 <!-- LAB:END -->
