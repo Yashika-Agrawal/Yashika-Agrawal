@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Fully automatic updater for README.md live-pulse and assets/terminal.svg using the GitHub API."""
+"""Fully automatic updater for README.md (live-pulse + playground-matrix) and assets/terminal.svg."""
+from collections import defaultdict
+from datetime import datetime, timedelta, timezone
 from html import escape
 import json
 import os
@@ -13,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 USERNAME = os.environ.get("GITHUB_USERNAME", "Yashika-Agrawal")
 PLAYGROUND_REPO = os.environ.get("PLAYGROUND_REPO", f"{USERNAME}/Engineering-playground")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "").strip()
+ACTIVE_WINDOW_DAYS = int(os.environ.get("ACTIVE_WINDOW_DAYS", "30"))
 
 
 def github_get(url: str):
@@ -51,8 +54,8 @@ def truncate(text: str, limit: int) -> str:
     return clean if len(clean) <= limit else clean[: limit - 1].rstrip() + "…"
 
 
-def pretty_filename(path: str) -> str:
-    stem = Path(path).stem.replace("-", " ").replace("_", " ")
+def pretty_name(text: str) -> str:
+    stem = Path(text).stem.replace("-", " ").replace("_", " ")
     return " ".join(w.capitalize() for w in stem.split())
 
 
@@ -60,37 +63,49 @@ def extract_md_title(content: str, fallback_path: str) -> str:
     for line in content.splitlines():
         m = re.match(r"^\s*#\s+(.+)$", line)
         if m:
-            # Strip inline markdown like **bold** or `code`
             title = re.sub(r"[`*_~]", "", m.group(1)).strip()
             if title:
                 return truncate(title, 72)
-    return pretty_filename(fallback_path)
+    return pretty_name(fallback_path)
 
 
 def fetch_recent_repos():
-    """Return top 3 most recently pushed public non-profile repositories."""
+    """Return up to 3 public non-profile repositories pushed within the last ACTIVE_WINDOW_DAYS."""
     try:
-        repos = github_get(f"https://api.github.com/users/{USERNAME}/repos?sort=pushed&per_page=10")
+        repos = github_get(f"https://api.github.com/users/{USERNAME}/repos?sort=pushed&per_page=15")
     except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
-        return []
+        return [], []
 
+    cutoff = datetime.now(timezone.utc) - timedelta(days=ACTIVE_WINDOW_DAYS)
+    all_non_profile = []
     active = []
+
     for r in repos:
         name = r.get("name", "")
         if not name or name.lower() == USERNAME.lower() or r.get("fork"):
             continue
-        active.append({
+        entry = {
             "name": name,
             "full_name": r.get("full_name", f"{USERNAME}/{name}"),
             "url": r.get("html_url", f"https://github.com/{USERNAME}/{name}"),
             "default_branch": r.get("default_branch", "main"),
-        })
-        if len(active) >= 3:
-            break
-    return active
+            "pushed_at": r.get("pushed_at", ""),
+        }
+        all_non_profile.append(entry)
+
+        pushed_str = r.get("pushed_at", "")
+        if pushed_str:
+            try:
+                pushed_dt = datetime.fromisoformat(pushed_str.replace("Z", "+00:00"))
+                if pushed_dt >= cutoff and len(active) < 3:
+                    active.append(entry)
+            except ValueError:
+                pass
+
+    return active, all_non_profile
 
 
-def fetch_latest_commit(recent_repos):
+def fetch_latest_commit(fallback_repos):
     """Fetch the most recent non-bot public commit across the user's repositories."""
     candidates = []
 
@@ -127,8 +142,7 @@ def fetch_latest_commit(recent_repos):
     if candidates:
         return candidates[0]
 
-    # Fallback: query commits directly on the most recently pushed repos
-    for repo in recent_repos:
+    for repo in fallback_repos[:5]:
         try:
             commits = github_get(f"https://api.github.com/repos/{repo['full_name']}/commits?per_page=5")
         except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
@@ -151,53 +165,79 @@ def fetch_latest_commit(recent_repos):
     return None
 
 
-def fetch_latest_playground_note():
-    """Find the most recently added/modified Markdown note in Engineering-playground."""
+def fetch_playground_info():
+    """Fetch default branch, latest modified .md note, and full folder->notes matrix from Engineering-playground."""
     try:
         repo_meta = github_get(f"https://api.github.com/repos/{PLAYGROUND_REPO}")
         branch = repo_meta.get("default_branch", "main")
-        commits = github_get(f"https://api.github.com/repos/{PLAYGROUND_REPO}/commits?per_page=10")
     except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
-        return None
+        return None, None
 
-    for c in commits:
-        sha = c.get("sha", "")
-        if not sha:
-            continue
-        try:
-            detail = github_get(f"https://api.github.com/repos/{PLAYGROUND_REPO}/commits/{sha}")
-        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
-            continue
+    latest_note = None
+    try:
+        commits = github_get(f"https://api.github.com/repos/{PLAYGROUND_REPO}/commits?per_page=10")
+        for c in commits:
+            sha = c.get("sha", "")
+            if not sha:
+                continue
+            try:
+                detail = github_get(f"https://api.github.com/repos/{PLAYGROUND_REPO}/commits/{sha}")
+            except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+                continue
 
-        md_files = [
-            f for f in detail.get("files", [])
-            if f.get("filename", "").lower().endswith(".md")
-            and f.get("status") != "removed"
-            and f.get("filename", "").lower() != "readme.md"
-        ]
-        if not md_files:
-            continue
+            md_files = [
+                f for f in detail.get("files", [])
+                if f.get("filename", "").lower().endswith(".md")
+                and f.get("status") != "removed"
+                and f.get("filename", "").lower() != "readme.md"
+            ]
+            if not md_files:
+                continue
 
-        filename = md_files[0]["filename"]
-        encoded = urllib.parse.quote(filename, safe="/")
-        raw_url = f"https://raw.githubusercontent.com/{PLAYGROUND_REPO}/{branch}/{encoded}"
-        blob_url = f"https://github.com/{PLAYGROUND_REPO}/blob/{branch}/{encoded}"
-        folder = str(Path(filename).parent)
-        folder_label = "" if folder == "." else folder
+            filename = md_files[0]["filename"]
+            encoded = urllib.parse.quote(filename, safe="/")
+            raw_url = f"https://raw.githubusercontent.com/{PLAYGROUND_REPO}/{branch}/{encoded}"
+            blob_url = f"https://github.com/{PLAYGROUND_REPO}/blob/{branch}/{encoded}"
+            folder = str(Path(filename).parent)
+            folder_label = "" if folder == "." else folder
 
-        try:
-            md_text = fetch_text(raw_url)
-            title = extract_md_title(md_text, filename)
-        except (urllib.error.URLError, TimeoutError):
-            title = pretty_filename(filename)
+            try:
+                md_text = fetch_text(raw_url)
+                title = extract_md_title(md_text, filename)
+            except (urllib.error.URLError, TimeoutError):
+                title = pretty_name(filename)
 
-        return {
-            "title": title,
-            "url": blob_url,
-            "folder": folder_label,
-        }
+            latest_note = {"title": title, "url": blob_url, "folder": folder_label}
+            break
+    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+        pass
 
-    return None
+    # Build full automatic playground matrix from repo tree
+    matrix_groups = defaultdict(list)
+    skip_names = {"readme.md", "backlog.md"}
+    try:
+        tree_data = github_get(f"https://api.github.com/repos/{PLAYGROUND_REPO}/git/trees/{branch}?recursive=1")
+        for item in tree_data.get("tree", []):
+            if item.get("type") != "blob":
+                continue
+            path = item.get("path", "")
+            fname = Path(path).name
+            if not path.lower().endswith(".md") or fname.lower() in skip_names or fname.startswith("_"):
+                continue
+            parts = path.split("/")
+            if len(parts) < 2:
+                continue
+            domain = parts[0]
+            encoded = urllib.parse.quote(path, safe="/")
+            blob_url = f"https://github.com/{PLAYGROUND_REPO}/blob/{branch}/{encoded}"
+            matrix_groups[domain].append({
+                "label": fname,
+                "url": blob_url,
+            })
+    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+        matrix_groups = {}
+
+    return latest_note, dict(matrix_groups)
 
 
 def render_terminal_svg(commit):
@@ -344,10 +384,18 @@ def render_terminal_svg(commit):
 """
 
 
+def replace_block(text: str, start: str, end: str, body: str) -> str:
+    if start not in text or end not in text:
+        return text
+    before, rest = text.split(start, 1)
+    _, after = rest.split(end, 1)
+    return before + start + "\n" + body + "\n" + end + after
+
+
 def main():
-    recent_repos = fetch_recent_repos()
-    latest_commit = fetch_latest_commit(recent_repos)
-    latest_note = fetch_latest_playground_note()
+    active_repos, all_repos = fetch_recent_repos()
+    latest_commit = fetch_latest_commit(all_repos)
+    latest_note, matrix_groups = fetch_playground_info()
 
     # 1. Regenerate assets/terminal.svg with live commit
     terminal_path = ROOT / "assets" / "terminal.svg"
@@ -356,41 +404,49 @@ def main():
         if latest_commit:
             print(f"Updated terminal.svg with {latest_commit['repo']}@{latest_commit['sha']}: {latest_commit['message']}")
 
-    # 2. Build 100% automatic live-pulse table
-    rows = [
+    # 2. Build 100% automatic live-pulse table (active repos = pushed in last 30 days only)
+    lab_rows = [
         "| Area | Live Pulse |",
         "|---|---|",
     ]
 
-    if recent_repos:
-        repo_links = " · ".join(f"[{r['name']}]({r['url']})" for r in recent_repos)
-        rows.append(f"| 🚀 **Active Repos** | {repo_links} |")
+    if active_repos:
+        repo_links = " · ".join(f"[{r['name']}]({r['url']})" for r in active_repos)
+        lab_rows.append(f"| 🚀 **Active Repos (30d)** | {repo_links} |")
 
     if latest_note:
         title_escaped = latest_note["title"].replace("|", "\\|")
         folder_suffix = f" (`{latest_note['folder']}`)" if latest_note["folder"] else ""
-        rows.append(f"| 📝 **Latest Note** | [{title_escaped}]({latest_note['url']}){folder_suffix} |")
+        lab_rows.append(f"| 📝 **Latest Note** | [{title_escaped}]({latest_note['url']}){folder_suffix} |")
 
     if latest_commit:
         msg_escaped = latest_commit["message"].replace("|", "\\|")
-        rows.append(
+        lab_rows.append(
             f"| 🕒 **Latest Commit** | [`{latest_commit['sha']}`]({latest_commit['url']}) {msg_escaped} (`{latest_commit['repo']}`) |"
         )
 
-    if len(rows) == 2:
-        raise SystemExit("GitHub API returned no live data; leaving README unchanged.")
-
-    section = "\n".join(rows)
-
     readme_path = ROOT / "README.md"
     readme = readme_path.read_text(encoding="utf-8")
-    start, end = "<!-- LAB:START -->", "<!-- LAB:END -->"
-    if start not in readme or end not in readme:
-        raise SystemExit("README is missing LAB markers.")
-    before, rest = readme.split(start, 1)
-    _, after = rest.split(end, 1)
-    readme_path.write_text(before + start + "\n" + section + "\n" + end + after, encoding="utf-8")
-    print("Updated README live-pulse section (100% automatic).")
+
+    if len(lab_rows) > 2:
+        readme = replace_block(readme, "<!-- LAB:START -->", "<!-- LAB:END -->", "\n".join(lab_rows))
+
+    # 3. Build 100% automatic playground-matrix table from Engineering-playground folders
+    if matrix_groups:
+        matrix_rows = [
+            "| Domain | Notes & Experiments |",
+            "|:---|:---|",
+        ]
+        domain_labels = {"devops": "DevOps", "azure": "Azure", "networking": "Networking"}
+        for domain in sorted(matrix_groups.keys(), key=str.lower):
+            notes = matrix_groups[domain]
+            links = " · ".join(f"[`{n['label']}`]({n['url']})" for n in notes)
+            nice_domain = domain_labels.get(domain.lower(), domain.replace("-", " ").title())
+            matrix_rows.append(f"| 📂 **{nice_domain}** | {links} |")
+        readme = replace_block(readme, "<!-- MATRIX:START -->", "<!-- MATRIX:END -->", "\n".join(matrix_rows))
+
+    readme_path.write_text(readme, encoding="utf-8")
+    print("Updated README live-pulse & playground-matrix (100% automatic).")
 
 
 if __name__ == "__main__":

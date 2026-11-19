@@ -23,7 +23,7 @@
 <!-- LAB:START -->
 | Area | Live Pulse |
 |---|---|
-| 🚀 **Active Repos** | [Engineering-playground](https://github.com/Yashika-Agrawal/Engineering-playground) · [Ananta](https://github.com/Yashika-Agrawal/Ananta) · [neetcode-submissions](https://github.com/Yashika-Agrawal/neetcode-submissions) |
+| 🚀 **Active Repos (30d)** | [Engineering-playground](https://github.com/Yashika-Agrawal/Engineering-playground) · [Ananta](https://github.com/Yashika-Agrawal/Ananta) |
 | 📝 **Latest Note** | [Deploying wiTH MultiPass](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/multipass.md) (`Devops`) |
 | 🕒 **Latest Commit** | [`2c74878`](https://github.com/Yashika-Agrawal/Engineering-playground/commit/2c74878f6e9bd45a436cba5016957c6a737a758b) docs: add guide for deploying app to Ubuntu VM via Multipass and Ng… (`Engineering-playground`) |
 <!-- LAB:END -->
@@ -34,12 +34,13 @@
 
 > A clickable constellation of hands-on experiments from [`Engineering-playground`](https://github.com/Yashika-Agrawal/Engineering-playground). Click any link to jump straight into the notes:
 
-| Domain | Focus Areas & Hands-On Experiments | Direct Links |
-|:---|:---|:---|
-| 🐧 **DevOps & Linux** | Local Ubuntu VMs, Multipass, SSH port 22 security groups, host key verification, firewall rules | [`multipass.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/multipass.md) |
-| 🔄 **CI/CD Automation** | Pipeline architecture, automated build/test gates, GitHub Actions runner isolation | [`intro-to-ci-cd.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/Ci-Cd/intro-to-ci-cd.md) |
-| 🌐 **Full-Stack Applications** | Real-time state synchronization, WebSocket event lifecycles, full-stack data flow | [`pollify`](https://github.com/Yashika-Agrawal/pollify) · [`live-tracker`](https://github.com/Yashika-Agrawal/live-tracker) |
-| 🛠️ **System Fundamentals** | Linux daemons, system services, networking basics, client-server architecture | [`intro-to-devops.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/intro-to-devops.md) |
+<!-- MATRIX:START -->
+| Domain | Notes & Experiments |
+|:---|:---|
+| 📂 **Azure** | [`ACR-tasks.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/ACR-tasks.md) · [`ai-agents.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/ai-agents.md) · [`azure-container-registry.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/azure-container-registry.md) · [`containers.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/containers.md) · [`deploying-container-to-azure-web-app.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/deploying-container-to-azure-web-app.md) · [`docker-to-acr.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/docker-to-acr.md) · [`fundamentals.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/fundamentals.md) · [`microsoft-foundry.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/microsoft-foundry.md) |
+| 📂 **DevOps** | [`intro-to-ci-cd.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/Ci-Cd/intro-to-ci-cd.md) · [`intro-to-devops.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/intro-to-devops.md) · [`multipass.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/multipass.md) |
+| 📂 **Networking** | [`browser-page-load.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/networking/browser-page-load.md) · [`content-type-and-www.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/networking/content-type-and-www.md) |
+<!-- MATRIX:END -->
 
 ---
 
