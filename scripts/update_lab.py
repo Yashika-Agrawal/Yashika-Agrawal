@@ -102,6 +102,10 @@ def fetch_recent_repos():
             except ValueError:
                 pass
 
+    # If no repo was pushed in the last ACTIVE_WINDOW_DAYS, always keep the most recently pushed repo
+    if not active and all_non_profile:
+        active = [all_non_profile[0]]
+
     return active, all_non_profile
 
 
