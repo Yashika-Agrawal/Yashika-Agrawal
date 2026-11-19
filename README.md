@@ -55,36 +55,6 @@
 
 </div>
 
-<br/>
-
-### 🛠️ Full-Stack Architecture Deep-Dive
-*(Click to expand the technical flow)*
-
-<details open>
-<summary><b>🔍 View: Pollify Full-Stack Architecture (Real-Time State Sync)</b></summary>
-<br/>
-
-```text
-[ React + Tailwind Frontend ]
-         │
-         │  (1) Cast Vote / Create Poll
-         ▼
-[ Express.js + Node.js API Gateway ]
-         │
-         ├──► (2) Persist Vote ──► [ Prisma ORM ] ──► [ PostgreSQL ]
-         │
-         │    (3) Broadcast Live Tally (Event Emit)
-         ▼
-[ Socket.IO Real-Time Server ]
-         │
-         ▼
-[ All Connected Client UIs Updated Instantly ]
-```
-
-* **Core Focus:** Ensuring database persistence through Prisma transactions while broadcasting live vote aggregates to connected clients via WebSockets with minimal latency.
-
-</details>
-
 ---
 
 ## `~/toolbox`
