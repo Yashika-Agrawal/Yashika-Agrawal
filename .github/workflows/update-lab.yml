@@ -1,6 +1,8 @@
 name: Update engineering lab section
 
 on:
+  schedule:
+    - cron: "0 */6 * * *"
   push:
     paths:
       - "data/lab.json"
@@ -19,14 +21,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
-      - name: Update README
+      - name: Update README and terminal SVG
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USERNAME: ${{ github.repository_owner }}
         run: python scripts/update_lab.py
       - name: Commit changes
         run: |
-          if [[ -n "$(git status --porcelain README.md)" ]]; then
+          if [[ -n "$(git status --porcelain README.md assets/terminal.svg)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add README.md
+            git add README.md assets/terminal.svg
             git commit -m "chore: update engineering lab"
             git push
           fi
