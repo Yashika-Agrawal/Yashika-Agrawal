@@ -21,13 +21,10 @@
 ## `~/lab/live-pulse`
 
 <!-- LAB:START -->
-| Area | Current Focus / Live Pulse |
+| Area | Live Pulse |
 |---|---|
-| 🚀 **Building** | Pollify (Full-stack real-time polling application) |
-| 🔍 **Exploring** | Full-Stack Web Development (.NET / React / Node.js) · Linux Internals & DevOps Automation |
-| 🧪 **Latest Experiment** | [Local Linux VMs & SSH key authentication with Multipass](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/multipass.md) |
-| 📝 **Engineering Note** | [CI/CD Pipeline Automation: Builds, Triggers & Runners](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/Ci-Cd/intro-to-ci-cd.md) |
-| 💡 **Today I Learned** | [Why SSH prints host key authenticity warning on first connect (Host verification vs client key pairs)](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/multipass.md) |
+| 🚀 **Active Repos** | [Engineering-playground](https://github.com/Yashika-Agrawal/Engineering-playground) · [Ananta](https://github.com/Yashika-Agrawal/Ananta) · [neetcode-submissions](https://github.com/Yashika-Agrawal/neetcode-submissions) |
+| 📝 **Latest Note** | [Deploying wiTH MultiPass](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/multipass.md) (`Devops`) |
 | 🕒 **Latest Commit** | [`2c74878`](https://github.com/Yashika-Agrawal/Engineering-playground/commit/2c74878f6e9bd45a436cba5016957c6a737a758b) docs: add guide for deploying app to Ubuntu VM via Multipass and Ng… (`Engineering-playground`) |
 <!-- LAB:END -->
 

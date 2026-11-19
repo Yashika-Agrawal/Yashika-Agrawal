@@ -5,7 +5,6 @@ on:
     - cron: "*/5 * * * *"
   push:
     paths:
-      - "data/lab.json"
       - "scripts/update_lab.py"
       - ".github/workflows/update-lab.yml"
   workflow_dispatch:

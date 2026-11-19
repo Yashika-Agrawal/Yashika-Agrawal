@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
-"""Update the LAB section in README.md and regenerate assets/terminal.svg with live GitHub commit data."""
+"""Fully automatic updater for README.md live-pulse and assets/terminal.svg using the GitHub API."""
 from html import escape
 import json
 import os
 from pathlib import Path
+import re
 import urllib.error
+import urllib.parse
 import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
 USERNAME = os.environ.get("GITHUB_USERNAME", "Yashika-Agrawal")
+PLAYGROUND_REPO = os.environ.get("PLAYGROUND_REPO", f"{USERNAME}/Engineering-playground")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "").strip()
 
 
@@ -22,6 +25,15 @@ def github_get(url: str):
     req = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(req, timeout=10) as resp:
         return json.loads(resp.read().decode("utf-8"))
+
+
+def fetch_text(url: str) -> str:
+    headers = {"User-Agent": f"{USERNAME}-engineering-lab"}
+    if GITHUB_TOKEN:
+        headers["Authorization"] = f"Bearer {GITHUB_TOKEN}"
+    req = urllib.request.Request(url, headers=headers)
+    with urllib.request.urlopen(req, timeout=10) as resp:
+        return resp.read().decode("utf-8", errors="replace")
 
 
 def is_bot_commit(author: str, message: str) -> bool:
@@ -39,11 +51,49 @@ def truncate(text: str, limit: int) -> str:
     return clean if len(clean) <= limit else clean[: limit - 1].rstrip() + "…"
 
 
-def fetch_latest_commit():
+def pretty_filename(path: str) -> str:
+    stem = Path(path).stem.replace("-", " ").replace("_", " ")
+    return " ".join(w.capitalize() for w in stem.split())
+
+
+def extract_md_title(content: str, fallback_path: str) -> str:
+    for line in content.splitlines():
+        m = re.match(r"^\s*#\s+(.+)$", line)
+        if m:
+            # Strip inline markdown like **bold** or `code`
+            title = re.sub(r"[`*_~]", "", m.group(1)).strip()
+            if title:
+                return truncate(title, 72)
+    return pretty_filename(fallback_path)
+
+
+def fetch_recent_repos():
+    """Return top 3 most recently pushed public non-profile repositories."""
+    try:
+        repos = github_get(f"https://api.github.com/users/{USERNAME}/repos?sort=pushed&per_page=10")
+    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+        return []
+
+    active = []
+    for r in repos:
+        name = r.get("name", "")
+        if not name or name.lower() == USERNAME.lower() or r.get("fork"):
+            continue
+        active.append({
+            "name": name,
+            "full_name": r.get("full_name", f"{USERNAME}/{name}"),
+            "url": r.get("html_url", f"https://github.com/{USERNAME}/{name}"),
+            "default_branch": r.get("default_branch", "main"),
+        })
+        if len(active) >= 3:
+            break
+    return active
+
+
+def fetch_latest_commit(recent_repos):
     """Fetch the most recent non-bot public commit across the user's repositories."""
     candidates = []
 
-    # 1. Try public events first for immediate push activity
     try:
         events = github_get(f"https://api.github.com/users/{USERNAME}/events/public?per_page=30")
         for event in events:
@@ -51,8 +101,7 @@ def fetch_latest_commit():
                 continue
             repo_full = event.get("repo", {}).get("name", "")
             repo_short = repo_full.split("/")[-1] if "/" in repo_full else repo_full
-            payload = event.get("payload", {})
-            commits = payload.get("commits") or []
+            commits = (event.get("payload") or {}).get("commits") or []
             for commit in reversed(commits):
                 author = commit.get("author", {}).get("name", "")
                 message = commit.get("message", "")
@@ -67,58 +116,92 @@ def fetch_latest_commit():
                     "url": f"https://github.com/{repo_full}/commit/{sha}",
                 })
                 break
-            if candidates:
-                # Prefer a non-profile repo if we already found one; otherwise keep looking once
-                if any(c["repo"].lower() != USERNAME.lower() for c in candidates):
-                    break
+            if any(c["repo"].lower() != USERNAME.lower() for c in candidates):
+                break
     except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
         pass
 
-    # Prefer a project repo over the profile repo itself if available
     for c in candidates:
         if c["repo"].lower() != USERNAME.lower():
             return c
     if candidates:
         return candidates[0]
 
-    # 2. Fallback: inspect recently pushed public repos directly
+    # Fallback: query commits directly on the most recently pushed repos
+    for repo in recent_repos:
+        try:
+            commits = github_get(f"https://api.github.com/repos/{repo['full_name']}/commits?per_page=5")
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+            continue
+        for c in commits:
+            commit_info = c.get("commit", {})
+            author = commit_info.get("author", {}).get("name", "")
+            message = commit_info.get("message", "")
+            sha = c.get("sha", "")
+            if not sha or is_bot_commit(author, message):
+                continue
+            return {
+                "repo": repo["name"],
+                "repo_full": repo["full_name"],
+                "sha": sha[:7],
+                "message": truncate(message, 68),
+                "url": c.get("html_url") or f"https://github.com/{repo['full_name']}/commit/{sha}",
+            }
+
+    return None
+
+
+def fetch_latest_playground_note():
+    """Find the most recently added/modified Markdown note in Engineering-playground."""
     try:
-        repos = github_get(f"https://api.github.com/users/{USERNAME}/repos?sort=pushed&per_page=10")
-        # Order non-profile repos first, then profile repo
-        ordered = [r for r in repos if r.get("name", "").lower() != USERNAME.lower()] + [
-            r for r in repos if r.get("name", "").lower() == USERNAME.lower()
-        ]
-        for repo in ordered:
-            repo_full = repo.get("full_name", "")
-            repo_short = repo.get("name", "")
-            if not repo_full:
-                continue
-            try:
-                commits = github_get(f"https://api.github.com/repos/{repo_full}/commits?per_page=5")
-            except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
-                continue
-            for c in commits:
-                commit_info = c.get("commit", {})
-                author = commit_info.get("author", {}).get("name", "")
-                message = commit_info.get("message", "")
-                sha = c.get("sha", "")
-                if not sha or is_bot_commit(author, message):
-                    continue
-                return {
-                    "repo": repo_short,
-                    "repo_full": repo_full,
-                    "sha": sha[:7],
-                    "message": truncate(message, 68),
-                    "url": c.get("html_url") or f"https://github.com/{repo_full}/commit/{sha}",
-                }
+        repo_meta = github_get(f"https://api.github.com/repos/{PLAYGROUND_REPO}")
+        branch = repo_meta.get("default_branch", "main")
+        commits = github_get(f"https://api.github.com/repos/{PLAYGROUND_REPO}/commits?per_page=10")
     except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
-        pass
+        return None
+
+    for c in commits:
+        sha = c.get("sha", "")
+        if not sha:
+            continue
+        try:
+            detail = github_get(f"https://api.github.com/repos/{PLAYGROUND_REPO}/commits/{sha}")
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+            continue
+
+        md_files = [
+            f for f in detail.get("files", [])
+            if f.get("filename", "").lower().endswith(".md")
+            and f.get("status") != "removed"
+            and f.get("filename", "").lower() != "readme.md"
+        ]
+        if not md_files:
+            continue
+
+        filename = md_files[0]["filename"]
+        encoded = urllib.parse.quote(filename, safe="/")
+        raw_url = f"https://raw.githubusercontent.com/{PLAYGROUND_REPO}/{branch}/{encoded}"
+        blob_url = f"https://github.com/{PLAYGROUND_REPO}/blob/{branch}/{encoded}"
+        folder = str(Path(filename).parent)
+        folder_label = "" if folder == "." else folder
+
+        try:
+            md_text = fetch_text(raw_url)
+            title = extract_md_title(md_text, filename)
+        except (urllib.error.URLError, TimeoutError):
+            title = pretty_filename(filename)
+
+        return {
+            "title": title,
+            "url": blob_url,
+            "folder": folder_label,
+        }
 
     return None
 
 
 def render_terminal_svg(commit):
-    repo_label = escape(commit["repo"]) if commit else "engineering-playground"
+    repo_label = escape(commit["repo"]) if commit else "Engineering-playground"
     commit_sha = escape(commit["sha"]) if commit else "main"
     commit_msg = escape(commit["message"]) if commit else "building full-stack projects & DevOps experiments"
 
@@ -261,21 +344,10 @@ def render_terminal_svg(commit):
 """
 
 
-def item(value):
-    if isinstance(value, dict):
-        title = value.get("title", "Untitled")
-        url = value.get("url", "").strip()
-        return f"[{title}]({url})" if url else title
-    return str(value)
-
-
-def joined(values):
-    return " · ".join(item(v) for v in values) if values else "Add details in data/lab.json"
-
-
 def main():
-    data = json.loads((ROOT / "data" / "lab.json").read_text(encoding="utf-8"))
-    latest_commit = fetch_latest_commit()
+    recent_repos = fetch_recent_repos()
+    latest_commit = fetch_latest_commit(recent_repos)
+    latest_note = fetch_latest_playground_note()
 
     # 1. Regenerate assets/terminal.svg with live commit
     terminal_path = ROOT / "assets" / "terminal.svg"
@@ -283,31 +355,30 @@ def main():
         terminal_path.write_text(render_terminal_svg(latest_commit), encoding="utf-8")
         if latest_commit:
             print(f"Updated terminal.svg with {latest_commit['repo']}@{latest_commit['sha']}: {latest_commit['message']}")
-        else:
-            print("GitHub API unavailable; wrote default terminal.svg.")
 
-    # 2. Update LAB section in README.md
-    experiment = item(data.get("recent_experiment", {}))
-    note = item(data.get("latest_note", {}))
-    today = item(data.get("today_i_learned", {}))
-
+    # 2. Build 100% automatic live-pulse table
     rows = [
-        "| Area | Current Focus / Live Pulse |",
+        "| Area | Live Pulse |",
         "|---|---|",
-        f"| 🚀 **Building** | {joined(data.get('building', []))} |",
-        f"| 🔍 **Exploring** | {joined(data.get('exploring', []))} |",
-        f"| 🧪 **Latest Experiment** | {experiment} |",
-        f"| 📝 **Engineering Note** | {note} |",
     ]
 
-    if today and today != "Untitled":
-        rows.append(f"| 💡 **Today I Learned** | {today} |")
+    if recent_repos:
+        repo_links = " · ".join(f"[{r['name']}]({r['url']})" for r in recent_repos)
+        rows.append(f"| 🚀 **Active Repos** | {repo_links} |")
+
+    if latest_note:
+        title_escaped = latest_note["title"].replace("|", "\\|")
+        folder_suffix = f" (`{latest_note['folder']}`)" if latest_note["folder"] else ""
+        rows.append(f"| 📝 **Latest Note** | [{title_escaped}]({latest_note['url']}){folder_suffix} |")
 
     if latest_commit:
         msg_escaped = latest_commit["message"].replace("|", "\\|")
         rows.append(
             f"| 🕒 **Latest Commit** | [`{latest_commit['sha']}`]({latest_commit['url']}) {msg_escaped} (`{latest_commit['repo']}`) |"
         )
+
+    if len(rows) == 2:
+        raise SystemExit("GitHub API returned no live data; leaving README unchanged.")
 
     section = "\n".join(rows)
 
@@ -319,7 +390,7 @@ def main():
     before, rest = readme.split(start, 1)
     _, after = rest.split(end, 1)
     readme_path.write_text(before + start + "\n" + section + "\n" + end + after, encoding="utf-8")
-    print("Updated README lab section.")
+    print("Updated README live-pulse section (100% automatic).")
 
 
 if __name__ == "__main__":
