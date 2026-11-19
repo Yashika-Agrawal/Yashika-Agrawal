@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Fully automatic updater for README.md (live-pulse + playground-matrix) and assets/terminal.svg."""
 from collections import defaultdict
-from datetime import datetime, timedelta, timezone
 from html import escape
 import json
 import os
@@ -15,7 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 USERNAME = os.environ.get("GITHUB_USERNAME", "Yashika-Agrawal")
 PLAYGROUND_REPO = os.environ.get("PLAYGROUND_REPO", f"{USERNAME}/Engineering-playground")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "").strip()
-ACTIVE_WINDOW_DAYS = int(os.environ.get("ACTIVE_WINDOW_DAYS", "3"))
+ACTIVE_REPO_COUNT = int(os.environ.get("ACTIVE_REPO_COUNT", "3"))
+EXCLUDED_REPOS = {USERNAME.lower(), "neetcode-submissions"}
 
 
 def github_get(url: str):
@@ -70,43 +70,26 @@ def extract_md_title(content: str, fallback_path: str) -> str:
 
 
 def fetch_recent_repos():
-    """Return up to 3 public non-profile repositories pushed within the last ACTIVE_WINDOW_DAYS."""
+    """Return the top ACTIVE_REPO_COUNT most recently pushed public non-fork repositories."""
     try:
         repos = github_get(f"https://api.github.com/users/{USERNAME}/repos?sort=pushed&per_page=15")
     except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
         return [], []
 
-    cutoff = datetime.now(timezone.utc) - timedelta(days=ACTIVE_WINDOW_DAYS)
     all_non_profile = []
-    active = []
-
     for r in repos:
         name = r.get("name", "")
-        if not name or name.lower() == USERNAME.lower() or r.get("fork"):
+        if not name or name.lower() in EXCLUDED_REPOS or r.get("fork"):
             continue
-        entry = {
+        all_non_profile.append({
             "name": name,
             "full_name": r.get("full_name", f"{USERNAME}/{name}"),
             "url": r.get("html_url", f"https://github.com/{USERNAME}/{name}"),
             "default_branch": r.get("default_branch", "main"),
             "pushed_at": r.get("pushed_at", ""),
-        }
-        all_non_profile.append(entry)
+        })
 
-        pushed_str = r.get("pushed_at", "")
-        if pushed_str:
-            try:
-                pushed_dt = datetime.fromisoformat(pushed_str.replace("Z", "+00:00"))
-                if pushed_dt >= cutoff and len(active) < 3:
-                    active.append(entry)
-            except ValueError:
-                pass
-
-    # If no repo was pushed in the last ACTIVE_WINDOW_DAYS, always keep the most recently pushed repo
-    if not active and all_non_profile:
-        active = [all_non_profile[0]]
-
-    return active, all_non_profile
+    return all_non_profile[:ACTIVE_REPO_COUNT], all_non_profile
 
 
 def fetch_latest_commit(fallback_repos):
