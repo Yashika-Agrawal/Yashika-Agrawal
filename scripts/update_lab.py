@@ -15,7 +15,7 @@ USERNAME = os.environ.get("GITHUB_USERNAME", "Yashika-Agrawal")
 PLAYGROUND_REPO = os.environ.get("PLAYGROUND_REPO", f"{USERNAME}/Engineering-playground")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "").strip()
 ACTIVE_REPO_COUNT = int(os.environ.get("ACTIVE_REPO_COUNT", "3"))
-EXCLUDED_REPOS = {USERNAME.lower(), "neetcode-submissions"}
+EXCLUDED_REPOS = {USERNAME.lower()}
 
 
 def github_get(url: str):

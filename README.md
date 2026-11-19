@@ -23,9 +23,9 @@
 <!-- LAB:START -->
 | Area | Live Pulse |
 |---|---|
-| 🚀 **Active Repos** | [Engineering-playground](https://github.com/Yashika-Agrawal/Engineering-playground) · [Ananta](https://github.com/Yashika-Agrawal/Ananta) · [Leetcode](https://github.com/Yashika-Agrawal/Leetcode) |
-| 📝 **Latest Note** | [Deploying wiTH MultiPass](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/multipass.md) (`Devops`) |
-| 🕒 **Latest Commit** | [`2c74878`](https://github.com/Yashika-Agrawal/Engineering-playground/commit/2c74878f6e9bd45a436cba5016957c6a737a758b) docs: add guide for deploying app to Ubuntu VM via Multipass and Ng… (`Engineering-playground`) |
+| 🚀 **Active Repos** | [Engineering-playground](https://github.com/Yashika-Agrawal/Engineering-playground) · [Ananta](https://github.com/Yashika-Agrawal/Ananta) · [neetcode-submissions](https://github.com/Yashika-Agrawal/neetcode-submissions) |
+| 📝 **Latest Note** | [Azure Key Vault](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/azure-key-vault.md) (`azure/ai-200`) |
+| 🕒 **Latest Commit** | [`114e49e`](https://github.com/Yashika-Agrawal/Engineering-playground/commit/114e49ebb0cdea9584e5d9def26dc3d80175716d) docs: add Azure Key Vault guide and update container deployment not… (`Engineering-playground`) |
 <!-- LAB:END -->
 
 ---
@@ -37,7 +37,7 @@
 <!-- MATRIX:START -->
 | Domain | Notes & Experiments |
 |:---|:---|
-| 📂 **Azure** | [`ACR-tasks.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/ACR-tasks.md) · [`ai-agents.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/ai-agents.md) · [`azure-container-registry.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/azure-container-registry.md) · [`containers.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/containers.md) · [`deploying-container-to-azure-web-app.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/deploying-container-to-azure-web-app.md) · [`docker-to-acr.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/docker-to-acr.md) · [`fundamentals.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/fundamentals.md) · [`microsoft-foundry.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/microsoft-foundry.md) |
+| 📂 **Azure** | [`ACR-tasks.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/ACR-tasks.md) · [`ai-agents.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/ai-agents.md) · [`azure-container-registry.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/azure-container-registry.md) · [`azure-key-vault.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/azure-key-vault.md) · [`containers.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/containers.md) · [`deploying-container-to-azure-web-app.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/deploying-container-to-azure-web-app.md) · [`docker-to-acr.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/docker-to-acr.md) · [`fundamentals.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/fundamentals.md) · [`microsoft-foundry.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/microsoft-foundry.md) |
 | 📂 **DevOps** | [`intro-to-ci-cd.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/Ci-Cd/intro-to-ci-cd.md) · [`intro-to-devops.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/intro-to-devops.md) · [`multipass.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/multipass.md) |
 | 📂 **Networking** | [`browser-page-load.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/networking/browser-page-load.md) · [`content-type-and-www.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/networking/content-type-and-www.md) |
 <!-- MATRIX:END -->
