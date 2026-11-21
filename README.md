@@ -24,8 +24,8 @@
 | Area | Live Pulse |
 |---|---|
 | 🚀 **Active Repos** | [Engineering-playground](https://github.com/Yashika-Agrawal/Engineering-playground) · [Ananta](https://github.com/Yashika-Agrawal/Ananta) · [neetcode-submissions](https://github.com/Yashika-Agrawal/neetcode-submissions) |
-| 📝 **Latest Note** | [Azure Key Vault](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/azure-key-vault.md) (`azure/ai-200`) |
-| 🕒 **Latest Commit** | [`114e49e`](https://github.com/Yashika-Agrawal/Engineering-playground/commit/114e49ebb0cdea9584e5d9def26dc3d80175716d) docs: add Azure Key Vault guide and update container deployment not… (`Engineering-playground`) |
+| 📝 **Latest Note** | [DevOps Learning Notes](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/README.md) (`Devops`) |
+| 🕒 **Latest Commit** | [`64a9e41`](https://github.com/Yashika-Agrawal/Engineering-playground/commit/64a9e419ad93b977071960a534933ee2e61ee76a) refactor: reorganize devops learning topics and restructure readme… (`Engineering-playground`) |
 <!-- LAB:END -->
 
 ---
@@ -38,7 +38,7 @@
 | Domain | Notes & Experiments |
 |:---|:---|
 | 📂 **Azure** | [`ACR-tasks.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/ACR-tasks.md) · [`ai-agents.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/ai-agents.md) · [`azure-container-registry.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/azure-container-registry.md) · [`azure-key-vault.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/azure-key-vault.md) · [`containers.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/containers.md) · [`deploying-container-to-azure-web-app.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/deploying-container-to-azure-web-app.md) · [`docker-to-acr.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/docker-to-acr.md) · [`fundamentals.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/fundamentals.md) · [`microsoft-foundry.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/azure/ai-200/microsoft-foundry.md) |
-| 📂 **DevOps** | [`intro-to-ci-cd.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/Ci-Cd/intro-to-ci-cd.md) · [`intro-to-devops.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/intro-to-devops.md) · [`multipass.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/multipass.md) |
+| 📂 **DevOps** | [`networking-and-servers.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/01-fundamentals/networking-and-servers.md) · [`cloud-vms-and-ssh.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/02-local-lab/cloud-vms-and-ssh.md) · [`multipass-setup.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/02-local-lab/multipass-setup.md) · [`github-actions-excloud.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/03-ci-cd/github-actions-excloud.md) · [`github-actions-self-hosted-runner.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/03-ci-cd/github-actions-self-hosted-runner.md) · [`intro-to-ci-cd.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/03-ci-cd/intro-to-ci-cd.md) |
 | 📂 **Networking** | [`browser-page-load.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/networking/browser-page-load.md) · [`content-type-and-www.md`](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/networking/content-type-and-www.md) |
 <!-- MATRIX:END -->
 
