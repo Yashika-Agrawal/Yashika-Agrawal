@@ -24,8 +24,8 @@
 | Area | Live Pulse |
 |---|---|
 | 🚀 **Active Repos** | [Engineering-playground](https://github.com/Yashika-Agrawal/Engineering-playground) · [Ananta](https://github.com/Yashika-Agrawal/Ananta) · [neetcode-submissions](https://github.com/Yashika-Agrawal/neetcode-submissions) |
-| 📝 **Latest Note** | [Docker Fundamentals — Learning Notes](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/04-docker/01-dockerfile-instructions.md) (`Devops/04-docker`) |
-| 🕒 **Latest Commit** | [`29136aa`](https://github.com/Yashika-Agrawal/Engineering-playground/commit/29136aa8e495389e2d3d7e07a984de811090be78) docs: add learning notes for Dockerfile instructions and multi-stag… (`Engineering-playground`) |
+| 📝 **Latest Note** | [DockerHub](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/04-docker/02-dockerhub.md) (`Devops/04-docker`) |
+| 🕒 **Latest Commit** | [`6942b12`](https://github.com/Yashika-Agrawal/Engineering-playground/commit/6942b12ef4041cdeab283df2a196aa123492cc6b) docs: add guide on authenticating GitHub Actions with DockerHub usi… (`Engineering-playground`) |
 <!-- LAB:END -->
 
 ---
