@@ -24,8 +24,8 @@
 | Area | Live Pulse |
 |---|---|
 | 🚀 **Active Repos** | [Engineering-playground](https://github.com/Yashika-Agrawal/Engineering-playground) · [RailRush](https://github.com/Yashika-Agrawal/RailRush) · [Ananta](https://github.com/Yashika-Agrawal/Ananta) |
-| 📝 **Latest Note** | [HTTPS Verification & Reverse Proxy Headers (X-Forwarded-, Host)](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/04-docker/08-https-verification-and-proxy-headers.md) (`Devops/04-docker`) |
-| 🕒 **Latest Commit** | [`64bb03d`](https://github.com/Yashika-Agrawal/Engineering-playground/commit/64bb03d4f662b83a1eb26aa2ef30b41c10481d85) docs: add ssl vs tls guide and link it from networking readme and d… (`Engineering-playground`) |
+| 📝 **Latest Note** | [DevOps Learning Notes](https://github.com/Yashika-Agrawal/Engineering-playground/blob/main/Devops/README.md) (`Devops`) |
+| 🕒 **Latest Commit** | [`4ad3fdb`](https://github.com/Yashika-Agrawal/Engineering-playground/commit/4ad3fdb1b461bfb33c9cdf5f38f0f87d80760dd8) docs: add documentation for Docker, containerization, and reverse p… (`Engineering-playground`) |
 <!-- LAB:END -->
 
 ---
